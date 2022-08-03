@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index'%}">DJANGO</a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'basic_app:register' %}">Register</a>
+            </li>
+
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'basic_app:user_login' %}">Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% block body_block %}
+      <!-- Anything outside of this will be inherited if you extend -->
+      {% endblock %}
+    </div>
+  </body>
+</html>
